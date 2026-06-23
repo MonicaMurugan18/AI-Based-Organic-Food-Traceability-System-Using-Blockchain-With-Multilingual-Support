@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Traceability - Home</title>
+    <meta name="description"
+        content="Discover farm-to-table organic produce powered by blockchain. Verify authenticity instantly.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            display: block;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .home-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 2px 10px rgba(43, 122, 11, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            animation: fadeInDown 0.8s ease;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(43, 122, 11, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(43, 122, 11, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            color: var(--text-dark);
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem 2rem 6rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .feature-card {
+            text-align: left;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .cta-btn,
+            .secondary-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="home-container">
+        <nav>
+            <a href="home.html" class="logo">
+                <span>🌱</span> OrgTrace
+            </a>
+            <div class="nav-links" style="display: flex; gap: 2rem;">
+                <a href="about.html"
+                    style="text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 1.1rem; transition: color 0.3s ease;">About</a>
+                <a href="guide.html"
+                    style="text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 1.1rem; transition: color 0.3s ease;">How to Use</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Trust in <span>Every Bite.</span></h1>
+            <p>From the farm's soil directly to your kitchen table. Verify the authenticity, origin, and freshness of your organic produce in real-time using tamper-proof web3 technologies.</p>
+
+            <div class="cta-group">
+                <a href="index.html" class="cta-btn">Launch Traceability App</a>
+                <a href="guide.html" class="secondary-btn">Learn How it Works</a>
+            </div>
+        </section>
+
+        <section id="learn-more" class="features">
+            <div class="glass-card feature-card">
+                <div class="feature-icon">🌾</div>
+                <h2>100% Organic</h2>
+                <p>We connect you directly to verified organic farmers. No harmful pesticides, no unaccountable middle-men. Just pure, natural crops straight from the source.</p>
+            </div>
+
+            <div class="glass-card feature-card">
+                <div class="feature-icon">⛓️</div>
+                <h2 style="color: #3b82f6;">Blockchain Secure</h2>
+                <p>Once harvest data is recorded onto our smart contracts via MetaMask, it becomes immutable. Total transparency and zero risk of data manipulation.</p>
+            </div>
+
+            <div class="glass-card feature-card">
+                <div class="feature-icon">🔍</div>
+                <h2 style="color: #f59e0b;">Instant Verification</h2>
+                <p>Track your food's entire journey by querying its unique product ID. Know the exact farmer, location, and the precise moment your food was harvested.</p>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

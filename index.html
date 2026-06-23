@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Food Traceability (Web3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Ethers.js for Blockchain Interaction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <!-- External Wallet Button -->
+    <div style="position: absolute; top: 1.5rem; right: 2rem; z-index: 100;">
+        <button id="connect-wallet-btn" class="submit-btn" style="margin-top: 0; padding: 0.8rem 1.5rem; background: var(--text-dark); display: flex; gap: 8px; align-items: center; border-radius: 30px;">
+            <span id="wallet-status">🦊 Connect MetaMask</span>
+        </button>
+    </div>
+
+    <div class="container" style="margin-top: 2rem;">
+        <header>
+            <h1>🌱 Organic Traceability</h1>
+            <p>Secure, transparent records for farm-to-table organic produce (Web3 Integrated).</p>
+        </header>
+
+        <main class="dashboard layout-grid">
+            <!-- Left Column: Form & History -->
+            <div class="left-column">
+                <section class="tracking-section glass-card">
+                    <h2>Track Product Process</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Enter a Product ID to simulate the blockchain tracing process.</p>
+                    <div class="input-group">
+                        <input type="text" id="track-id" placeholder="Enter Product ID..." required>
+                    </div>
+                    <button type="button" class="submit-btn" id="track-btn" style="background: linear-gradient(135deg, #1f2937, #374151);">🔍 Initiate Tracking</button>
+                    
+                    <!-- Tracking Steps Animation -->
+                    <div id="tracking-steps" style="display: none; margin-top: 1.5rem;">
+                        <div class="step" id="step1">⏳ Querying Blockchain Network...</div>
+                        <div class="step" id="step2" style="display: none;">🔐 Verifying Origin Contract...</div>
+                        <div class="step" id="step3" style="display: none;">🧾 Retrieving Farm Data...</div>
+                    </div>
+                </section>
+
+                <section class="form-section glass-card">
+                    <h2>Add New Product</h2>
+                    <form id="traceability-form">
+                        <div class="input-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" placeholder="e.g. Organic Tomatoes" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="farmer-name">Farmer Name</label>
+                            <input type="text" id="farmer-name" placeholder="e.g. Anbu" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="e.g. Madurai, Tamil Nadu" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="harvest-date">Harvest Date</label>
+                            <input type="date" id="harvest-date" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="product-quality">Quality</label>
+                            <select id="product-quality" required style="width: 100%; padding: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #fff; font-size: 1rem;">
+                                <option value="" disabled selected style="color: #333">Select Quality...</option>
+                                <option value="Premium" style="color: #333">Premium</option>
+                                <option value="Grade A" style="color: #333">Grade A</option>
+                                <option value="Standard" style="color: #333">Standard</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn" id="save-btn">+ Save to Blockchain</button>
+                    </form>
+                </section>
+
+                <section class="history-section glass-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="margin-bottom: 0;">View History</h2>
+                        <button type="button" id="clear-history-btn" style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.8rem; transition: background 0.3s; line-height: 1;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='transparent'">Clear</button>
+                    </div>
+                    <div id="history-list" class="history-list">
+                        <!-- History items will be injected here via JS -->
+                        <p class="empty-state">No products entered yet.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Results & QR Code -->
+            <div class="right-column">
+                <section id="empty-result" class="glass-card empty-result-card">
+                    <div class="icon">🔍</div>
+                    <h3>No Product Selected</h3>
+                    <p>Submit the form or select an item from history to view details and generate a QR code.</p>
+                </section>
+
+                <section class="result-section glass-card" id="result-section" style="display: none;">
+                    <h2>Product Details</h2>
+                    <!-- Display Blockchain Check -->
+                    <div id="blockchain-badge" style="display: none; background: #c6f6d5; color: #22543d; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 1rem; width: fit-content;">
+                        ✓ Secured on Blockchain
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-item" style="background: rgba(43, 122, 11, 0.1); border-left-color: var(--primary-color);">
+                            <span class="label">Tracking ID:</span>
+                            <span class="value" id="display-id" style="font-family: monospace; color: var(--primary-color); font-size: 1.1em;"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Product:</span>
+                            <span class="value" id="display-product"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Farmer:</span>
+                            <span class="value" id="display-farmer"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Location:</span>
+                            <span class="value" id="display-location"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Date:</span>
+                            <span class="value" id="display-date"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Quality:</span>
+                            <span class="value" id="display-quality"></span>
+                        </div>
+                    </div>
+
+                    <div class="qr-container">
+                        <h3>JSON Base QR Code</h3>
+                        <img id="qr-code-img" src="" alt="Traceability Data QR Code">
+                    </div>
+
+                    <div class="actions">
+                        <button id="play-audio-btn" class="audio-btn" type="button">
+                            🔊 Play Details in Tamil
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

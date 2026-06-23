@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Organic Traceability</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            display: block; 
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .about-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            max-width: 900px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header-section h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .header-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .content-section {
+            max-width: 900px;
+            width: 100%;
+            padding: 0 2rem 4rem;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .about-card {
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-card h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .cta-bottom {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(43, 122, 11, 0.3);
+            transition: all 0.4s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(43, 122, 11, 0.4);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="about-container">
+        <nav>
+            <a href="home.html" class="logo">
+                <span>🌱</span> OrgTrace
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="guide.html">How to Use</a>
+            </div>
+        </nav>
+
+        <section class="header-section">
+            <h1>About OrgTrace</h1>
+            <p>Empowering the organic food supply chain with transparency, security, and trust through Web3 technologies.</p>
+        </section>
+
+        <section class="content-section">
+            <div class="glass-card about-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌍</div>
+                <h2>Our Mission</h2>
+                <p>We believe everyone deserves to know exactly where their food comes from. Our mission is to bridge the gap between conscientious consumers and the dedicated farmers who work hard to produce genuine organic food. By eliminating intermediaries and verifying data on an immutable blockchain, we ensure authenticity at every step.</p>
+            </div>
+
+            <div class="glass-card about-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⛓️</div>
+                <h2>Why Blockchain?</h2>
+                <p>Traditional paper records and centralized databases are vulnerable to fraud and manipulation. By utilizing smart contracts, every harvest recorded on our platform is permanently etched into the blockchain. This means the data cannot be altered, providing a 100% verifiable and tamper-proof history of your agricultural products.</p>
+            </div>
+
+            <div class="glass-card about-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
+                <h2>Who We Serve</h2>
+                <p>We serve <b>Farmers</b> by giving them a platform to showcase their dedication to organic practices and connecting them directly with consumers who appreciate value. We serve <b>Consumers</b> by providing peace of mind through a transparent, verifiable ecosystem where every bite can be traced back to its root.</p>
+            </div>
+            
+            <div class="cta-bottom">
+                <a href="index.html" class="cta-btn">Experience The Traceability App</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
